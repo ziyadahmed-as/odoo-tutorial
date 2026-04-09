@@ -1,0 +1,92 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual env
+venv/
+
+# Odoo core (IMPORTANT)
+odoo/
+.odoo/
+
+# Logs & DB
+*.log
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+
+# hg stuff
+*.orig
+status
+
+# Odoo specifics
+odoo/filestore/
+odoo/addons/base/maintenance
+/odoo.conf
+data/
+backup/
+dumps/
+logs/
+*.log
+*.sql
+*.dump
+*.db
+*.sqlite
+
+# Large Files & Binaries
+*.exe
+*.dll
+*.so
+*.dylib
+*.iso
+*.iso.gz
+*.bin
+*.zip
+*.tar
+*.gz
+*.7z
+*.rar
+*.pkg
+*.dmg
+*.tmp
+*.bak
+*.old
+
+# Virtualenv
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+/bin/
+/build/
+/dist/
+/include/
+/lib/
+/man/
+/share/
+/src/
+
+# IDE stuff
+.idea/
+.vscode/
+*.swp
+*.sublime-project
+*.sublime-workspace
+
+# JS tooling (for Odoo JS parts)
+node_modules/
+jsconfig.json
+tsconfig.json
+package-lock.json
+package.json
+.husky
+
+# OS Specific
+Thumbs.db
+Desktop.ini
+.DS_Store
