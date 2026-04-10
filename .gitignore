@@ -7,6 +7,8 @@ venv/
 
 # Odoo core (IMPORTANT)
 odoo/
+odoo/filestore/
+odoo/addons/base/maintenance
 .odoo/
 
 # Logs & DB
@@ -22,8 +24,7 @@ odoo/
 status
 
 # Odoo specifics
-odoo/filestore/
-odoo/addons/base/maintenance
+
 /odoo.conf
 data/
 backup/
