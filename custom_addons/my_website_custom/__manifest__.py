@@ -1,10 +1,22 @@
 {
     'name': 'My Website Custom',
     'version': '1.0',
-    'depends': ['website'],
+    'summary': 'Educational Platform Customization',
+    'description': 'Custom module for an educational organization website.',
+    'category': 'Website',
+    'author': 'Antigravity',
+    'depends': ['website', 'portal'],
     'data': [
-        'views/website_templates.xml',
+        'security/ir.model.access.csv',
+        'views/course_templates.xml',
+        'views/instructor_templates.xml',
     ],
+    'assets': {
+        'web.assets_frontend': [
+            'my_website_custom/static/src/css/style.css',
+        ],
+    },
     'installable': True,
-    'application': False,
+    'application': True,
+    'license': 'LGPL-3',
 }
