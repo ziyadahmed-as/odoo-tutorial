@@ -4,7 +4,7 @@
     'summary': 'Educational Platform Customization',
     'description': 'Custom module for an educational organization website.',
     'category': 'Website',
-    'author': 'Antigravity',
+    'author': 'Ziyad',
     'depends': ['website', 'portal'],
     'data': [
         'security/ir.model.access.csv',
