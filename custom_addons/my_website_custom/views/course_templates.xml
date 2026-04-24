@@ -71,6 +71,12 @@
                                         <li class="breadcrumb-item active" aria-current="page" t-field="course.name"/>
                                     </ol>
                                 </nav>
+                                <div t-if="request.params.get('enrolled')" class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>Congratulations!</strong> You have successfully enrolled in this course.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                                 <h1 class="display-4 font-weight-bold mb-3" t-field="course.name"/>
                                 <div class="d-flex align-items-center mb-4">
                                     <div t-if="course.instructor_id.image" class="mr-3">
@@ -96,12 +102,35 @@
                                 <div class="card border-0 shadow-lg sticky-top" style="top: 100px;">
                                     <div class="card-body p-4">
                                         <h2 class="h1 mb-4" t-esc="course.price if course.price > 0 else 'Free'"/>
-                                        <button class="btn btn-primary btn-lg btn-block mb-3 rounded-pill">Enroll Now</button>
+                                        
+                                        <t t-if="not is_enrolled">
+                                            <a t-attf-href="/course/enroll/#{course.id}" class="btn btn-primary btn-lg btn-block mb-3 rounded-pill">Enroll Now</a>
+                                        </t>
+                                        <t t-else="">
+                                            <button class="btn btn-success btn-lg btn-block mb-3 rounded-pill" disabled="disabled">
+                                                <i class="fa fa-check-circle mr-2"></i> Enrolled
+                                            </button>
+                                        </t>
+
                                         <ul class="list-unstyled">
                                             <li class="mb-2"><i class="fa fa-clock-o text-primary mr-2"></i> <span t-field="course.duration"/></li>
                                             <li class="mb-2"><i class="fa fa-signal text-primary mr-2"></i> <span t-field="course.level"/></li>
                                             <li class="mb-2"><i class="fa fa-certificate text-primary mr-2"></i> Certificate of Completion</li>
                                         </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-4" t-if="course.student_ids">
+                                    <h4>Registered Students</h4>
+                                    <div class="d-flex flex-wrap">
+                                        <t t-foreach="course.student_ids" t-as="student">
+                                            <div class="mr-2 mb-2 text-center" style="width: 60px;">
+                                                <img t-if="student.image_128" t-att-src="image_data_uri(student.image_128)" class="rounded-circle mb-1" style="width: 40px; height: 40px; object-fit: cover;"/>
+                                                <div t-else="" class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mx-auto mb-1" style="width: 40px; height: 40px;">
+                                                    <i class="fa fa-user text-white-50"></i>
+                                                </div>
+                                                <small class="d-block text-truncate" t-esc="student.name"/>
+                                            </div>
+                                        </t>
                                     </div>
                                 </div>
                             </div>

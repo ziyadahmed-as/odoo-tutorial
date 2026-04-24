@@ -18,6 +18,13 @@ class EducationCourse(models.Model):
     price = fields.Float(string='Price', default=0.0)
     duration = fields.Char(string='Duration (e.g. 10 hours)')
     active = fields.Boolean(default=True)
+    enrollment_ids = fields.One2many('education.enrollment', 'course_id', string='Enrollments')
+    student_ids = fields.Many2many('res.users', string='Students', compute='_compute_student_ids', store=True)
+
+    @api.depends('enrollment_ids.student_id')
+    def _compute_student_ids(self):
+        for course in self:
+            course.student_ids = course.enrollment_ids.mapped('student_id')
 
     def _compute_website_url(self):
         super(EducationCourse, self)._compute_website_url()
