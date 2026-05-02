@@ -4,7 +4,7 @@
     'summary': 'Educational Platform Customization',
     'description': 'Custom module for an educational organization website.',
     'category': 'Website',
-    'author': 'Ziyad',
+    'author': 'Ziyad Ahmed',
     'depends': ['website', 'portal'],
     'data': [
         'security/ir.model.access.csv',

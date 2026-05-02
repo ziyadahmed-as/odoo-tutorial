@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- ══════════════════════════════════════════════════════
+             MODULE CATEGORY
+        ══════════════════════════════════════════════════════ -->
+        <record id="module_category_library" model="ir.module.category">
+            <field name="name">Library</field>
+            <field name="description">Manage the library books and loans.</field>
+            <field name="sequence">50</field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════
+             GROUP: Library User
+             - Can read books and create their own loan requests.
+             - Cannot edit book details or delete records.
+        ══════════════════════════════════════════════════════ -->
+        <record id="group_library_user" model="res.groups">
+            <field name="name">Library User</field>
+            <field name="category_id" ref="module_category_library"/>
+            <field name="comment">
+                Patrons / regular library members.
+                They can browse the catalogue and submit loan requests.
+            </field>
+        </record>
+
+        <!-- ══════════════════════════════════════════════════════
+             GROUP: Library Manager
+             - Full CRUD on Books and Loans.
+             - Implicitly inherits Library User.
+        ══════════════════════════════════════════════════════ -->
+        <record id="group_library_manager" model="res.groups">
+            <field name="name">Library Manager</field>
+            <field name="category_id" ref="module_category_library"/>
+            <field name="implied_ids" eval="[(4, ref('group_library_user'))]"/>
+            <field name="comment">
+                Staff / librarians.
+                Full create, read, update and delete permissions on all library records.
+            </field>
+            <!-- Make the internal user automatically a Library User -->
+            <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+    </data>
+</odoo>
