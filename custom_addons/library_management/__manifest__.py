@@ -20,7 +20,7 @@
     'license': 'LGPL-3',
 
     # Dependencies
-    'depends': ['base', 'mail'],
+    'depends': ['base'],
 
     # Data files loaded in this order
     'data': [

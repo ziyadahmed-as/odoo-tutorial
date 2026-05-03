@@ -26,4 +26,10 @@
               groups="library_management.group_library_manager"
               sequence="100"/>
 
+    <menuitem id="menu_library_settings_groups"
+              name="Access Groups"
+              parent="menu_library_config"
+              action="base.action_res_groups"
+              sequence="10"/>
+
 </odoo>

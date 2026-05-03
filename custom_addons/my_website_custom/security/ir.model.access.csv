@@ -1,8 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_education_course_public,education.course.public,model_education_course,base.group_public,1,0,0,0
-access_education_course_user,education.course.user,model_education_course,base.group_user,1,1,1,1
-access_education_instructor_public,education.instructor.public,model_education_instructor,base.group_public,1,0,0,0
-access_education_instructor_user,education.instructor.user,model_education_instructor,base.group_user,1,1,1,1
-access_education_enrollment_public,education.enrollment.public,model_education_enrollment,base.group_public,1,0,0,0
-access_education_enrollment_portal,education.enrollment.portal,model_education_enrollment,base.group_portal,1,0,1,0
-access_education_enrollment_user,education.enrollment.user,model_education_enrollment,base.group_user,1,1,1,1
