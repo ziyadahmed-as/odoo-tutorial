@@ -17,6 +17,65 @@
         </arch>
     </record>
 
+    <!-- Kanban View -->
+    <record id="view_beltech_project_kanban" model="ir.ui.view">
+        <name>beltech.project.kanban</name>
+        <model>beltech.project</model>
+        <arch type="xml">
+            <kanban default_group_by="status">
+                <field name="name"/>
+                <field name="manager_id"/>
+                <field name="budget"/>
+                <field name="status"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <div>
+                                    Manager: <field name="manager_id"/>
+                                </div>
+                                <div>
+                                    Budget: <field name="budget"/>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <field name="status" widget="label_selection" options="{'classes': {'draft': 'default', 'in_progress': 'warning', 'completed': 'success', 'cancelled': 'danger'}}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </arch>
+    </record>
+
+    <!-- Pivot View -->
+    <record id="view_beltech_project_pivot" model="ir.ui.view">
+        <name>beltech.project.pivot</name>
+        <model>beltech.project</model>
+        <arch type="xml">
+            <pivot string="Projects Analysis">
+                <field name="manager_id" type="row"/>
+                <field name="status" type="col"/>
+                <field name="budget" type="measure"/>
+            </pivot>
+        </arch>
+    </record>
+
+    <!-- Graph View -->
+    <record id="view_beltech_project_graph" model="ir.ui.view">
+        <name>beltech.project.graph</name>
+        <model>beltech.project</model>
+        <arch type="xml">
+            <graph string="Projects Analysis" type="bar">
+                <field name="department_id"/>
+                <field name="budget" type="measure"/>
+            </graph>
+        </arch>
+    </record>
+
     <!-- Form View -->
     <record id="view_beltech_project_form" model="ir.ui.view">
         <name>beltech.project.form</name>
@@ -31,6 +90,11 @@
                     <field name="status" widget="statusbar" statusbar_visible="draft,in_progress,completed"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_beltech_project)d" type="action" class="oe_stat_button" icon="fa-tasks">
+                            <field name="task_count" string="Tasks" widget="statinfo"/>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <h1>
                             <field name="name" placeholder="Project Name..."/>
@@ -48,7 +112,17 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Description">
+                        <page string="Tasks" name="tasks">
+                            <field name="task_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="assigned_to"/>
+                                    <field name="deadline"/>
+                                    <field name="status"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Description" name="description">
                             <field name="description" placeholder="Project details..."/>
                         </page>
                     </notebook>

@@ -21,6 +21,13 @@ class BeltechProject(models.Model):
     ], string='Status', default='draft', tracking=True)
 
     progress = fields.Integer(string='Progress (%)', compute='_compute_progress', store=True)
+    task_ids = fields.One2many('beltech.project.task', 'project_id', string='Tasks')
+    task_count = fields.Integer(string='Task Count', compute='_compute_task_count')
+
+    @api.depends('task_ids')
+    def _compute_task_count(self):
+        for record in self:
+            record.task_count = len(record.task_ids)
 
     @api.depends('status')
     def _compute_progress(self):
@@ -51,3 +58,16 @@ class BeltechProject(models.Model):
 
     def action_draft(self):
         self.status = 'draft'
+
+class BeltechProjectTask(models.Model):
+    _name = 'beltech.project.task'
+    _description = 'Project Task'
+
+    name = fields.Char(string='Task Name', required=True)
+    project_id = fields.Many2one('beltech.project', string='Project', ondelete='cascade')
+    assigned_to = fields.Many2one('res.users', string='Assigned To')
+    deadline = fields.Date(string='Deadline')
+    status = fields.Selection([
+        ('todo', 'To Do'),
+        ('done', 'Done')
+    ], default='todo')

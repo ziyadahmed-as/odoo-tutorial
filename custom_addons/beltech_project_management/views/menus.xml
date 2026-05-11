@@ -5,7 +5,7 @@
         <name>Projects</name>
         <type>ir.actions.act_window</type>
         <res_model>beltech.project</res_model>
-        <view_mode>tree,form</view_mode>
+        <view_mode>kanban,tree,form,pivot,graph</view_mode>
         <search_view_id ref="view_beltech_project_search"/>
         <help type="html">
             <p class="o_view_nocontent_smiling_face">
