@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_beltech_project_user,beltech.project.user,model_beltech_project,group_beltech_user,1,1,1,0
 access_beltech_project_manager,beltech.project.manager,model_beltech_project,group_beltech_manager,1,1,1,1
+access_beltech_task_user,beltech.task.user,model_beltech_project_task,group_beltech_user,1,1,1,1
+access_beltech_task_manager,beltech.task.manager,model_beltech_project_task,group_beltech_manager,1,1,1,1

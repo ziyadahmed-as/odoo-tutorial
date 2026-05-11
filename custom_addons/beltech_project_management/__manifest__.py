@@ -15,6 +15,8 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
+        'data/ir_sequence_data.xml',
+        'data/project_data.xml',
         'views/project_views.xml',
         'views/menus.xml',
     ],
