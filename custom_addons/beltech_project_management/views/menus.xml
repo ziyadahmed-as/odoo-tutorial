@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- Action for Projects -->
-        <record id="action_beltech_project" model="ir.actions.act_window">
-            <field name="name">Projects</field>
-            <field name="res_model">beltech.project</field>
-            <field name="view_mode">kanban,list,form</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                    Create your first project!
-                </p>
-            </field>
-        </record>
-
-        <!-- Action for Tasks -->
-        <record id="action_beltech_project_task" model="ir.actions.act_window">
-            <field name="name">Tasks</field>
-            <field name="res_model">beltech.project.task</field>
-            <field name="view_mode">list,form</field>
-            <field name="search_view_id" ref="view_beltech_task_search"/>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                    Assign tasks to your projects.
-                </p>
-            </field>
-        </record>
-
         <!-- Main Menu -->
         <menuitem id="menu_beltech_root"
                   name="BelTech"

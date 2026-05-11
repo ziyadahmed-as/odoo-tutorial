@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <!-- Actions (Must be defined before the views that use them in smart buttons) -->
+        <record id="action_beltech_project_task" model="ir.actions.act_window">
+            <field name="name">Tasks</field>
+            <field name="res_model">beltech.project.task</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Assign tasks to your projects.
+                </p>
+            </field>
+        </record>
+
         <!-- Project List View -->
         <record id="view_beltech_project_tree" model="ir.ui.view">
             <field name="name">beltech.project.list</field>
