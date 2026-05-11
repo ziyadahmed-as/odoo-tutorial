@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="module_category_beltech_project" model="ir.module.category">
-        <name>BelTech Project Management</name>
-        <description>Helps you manage your projects and tasks.</description>
-        <sequence>10</sequence>
-    </record>
+    <data>
+        <record id="module_category_beltech_project" model="ir.module.category">
+            <field name="name">BelTech Project Management</field>
+            <field name="description">Security category for BelTech project management system.</field>
+            <field name="sequence">10</field>
+        </record>
 
-    <record id="group_beltech_user" model="res.groups">
-        <name>User</name>
-        <category_id ref="module_category_beltech_project"/>
-        <implied_ids eval="[(4, ref('base.group_user'))]"/>
-    </record>
+        <record id="group_beltech_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="implied_ids" eval="[Command.link(ref('base.group_user'))]"/>
+        </record>
 
-    <record id="group_beltech_manager" model="res.groups">
-        <name>Manager</name>
-        <category_id ref="module_category_beltech_project"/>
-        <implied_ids eval="[(4, ref('group_beltech_user'))]"/>
-        <users eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
-    </record>
+        <record id="group_beltech_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="implied_ids" eval="[Command.link(ref('group_beltech_user'))]"/>
+            <field name="user_ids" eval="[Command.link(ref('base.user_root')), Command.link(ref('base.user_admin'))]"/>
+        </record>
+    </data>
 </odoo>
