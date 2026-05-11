@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action for Projects -->
+    <record id="action_beltech_project" model="ir.actions.act_window">
+        <name>Projects</name>
+        <type>ir.actions.act_window</type>
+        <res_model>beltech.project</res_model>
+        <view_mode>tree,form</view_mode>
+        <search_view_id ref="view_beltech_project_search"/>
+        <help type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first project!
+            </p>
+        </help>
+    </record>
+
+    <!-- Main Menu -->
+    <menuitem id="menu_beltech_root"
+              name="BelTech"
+              sequence="10"
+              web_icon="beltech_project_management,static/description/icon.png"/>
+
+    <!-- Category Menu -->
+    <menuitem id="menu_beltech_project_category"
+              name="Operations"
+              parent="menu_beltech_root"
+              sequence="10"/>
+
+    <!-- Action Menu -->
+    <menuitem id="menu_beltech_project"
+              name="Projects"
+              parent="menu_beltech_project_category"
+              action="action_beltech_project"
+              sequence="10"/>
+</odoo>

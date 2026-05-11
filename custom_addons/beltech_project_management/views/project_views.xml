@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_beltech_project_tree" model="ir.ui.view">
+        <name>beltech.project.tree</name>
+        <model>beltech.project</model>
+        <arch type="xml">
+            <tree string="Projects" decoration-info="status == 'draft'" decoration-success="status == 'completed'" decoration-warning="status == 'in_progress'" decoration-danger="status == 'cancelled'">
+                <field name="name"/>
+                <field name="manager_id"/>
+                <field name="department_id"/>
+                <field name="budget" widget="monetary"/>
+                <field name="deadline"/>
+                <field name="progress" widget="progressbar"/>
+                <field name="status" widget="badge" decoration-info="status == 'draft'" decoration-success="status == 'completed'" decoration-warning="status == 'in_progress'" decoration-danger="status == 'cancelled'"/>
+            </tree>
+        </arch>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_beltech_project_form" model="ir.ui.view">
+        <name>beltech.project.form</name>
+        <model>beltech.project</model>
+        <arch type="xml">
+            <form string="Project">
+                <header>
+                    <button name="action_in_progress" string="Start Project" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'draft')]}"/>
+                    <button name="action_done" string="Mark as Done" type="object" class="oe_highlight" attrs="{'invisible': [('status', '!=', 'in_progress')]}"/>
+                    <button name="action_draft" string="Reset to Draft" type="object" attrs="{'invisible': [('status', 'not in', ['cancelled', 'completed'])]}"/>
+                    <button name="action_cancel" string="Cancel" type="object" attrs="{'invisible': [('status', 'in', ['completed', 'cancelled'])]}"/>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,in_progress,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Project Name..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="manager_id"/>
+                            <field name="department_id"/>
+                        </group>
+                        <group>
+                            <field name="budget"/>
+                            <field name="deadline"/>
+                            <field name="progress" widget="progressbar"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" placeholder="Project details..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </arch>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_beltech_project_search" model="ir.ui.view">
+        <name>beltech.project.search</name>
+        <model>beltech.project</model>
+        <arch type="xml">
+            <search string="Search Projects">
+                <field name="name"/>
+                <field name="manager_id"/>
+                <field name="department_id"/>
+                <filter string="Draft" name="draft" domain="[('status', '=', 'draft')]"/>
+                <filter string="In Progress" name="in_progress" domain="[('status', '=', 'in_progress')]"/>
+                <filter string="Completed" name="completed" domain="[('status', '=', 'completed')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Manager" name="manager" context="{'group_by': 'manager_id'}"/>
+                    <filter string="Status" name="status" context="{'group_by': 'status'}"/>
+                    <filter string="Department" name="department" context="{'group_by': 'department_id'}"/>
+                </group>
+            </search>
+        </arch>
+    </record>
+</odoo>
