@@ -9,7 +9,7 @@
         - Manager assignments
         - Deadlines and departments
     """,
-    'author': 'BelTech Solutions',
+    'author': 'Ziyad Ahmed',
     'category': 'Project Management',
     'depends': ['base', 'mail', 'hr'],
     'data': [
