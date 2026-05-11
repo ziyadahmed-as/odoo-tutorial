@@ -22,26 +22,52 @@
         <name>beltech.project.kanban</name>
         <model>beltech.project</model>
         <arch type="xml">
-            <kanban default_group_by="status">
+            <kanban default_group_by="status" class="o_kanban_small_column" records_draggable="true">
                 <field name="name"/>
                 <field name="manager_id"/>
                 <field name="budget"/>
                 <field name="status"/>
+                <field name="color"/>
+                <field name="progress"/>
+                <field name="activity_state"/>
+                <progressbar field="status" colors='{"draft": "muted", "in_progress": "warning", "completed": "success", "cancelled": "danger"}'/>
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click">
-                            <div class="oe_kanban_details">
-                                <strong class="o_kanban_record_title">
-                                    <field name="name"/>
-                                </strong>
-                                <div>
-                                    Manager: <field name="manager_id"/>
+                        <div t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''} oe_kanban_global_click oe_kanban_card">
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title" style="font-size: 1.2em; color: #2c3e50;">
+                                            <field name="name"/>
+                                        </strong>
+                                    </div>
+                                    <div class="o_dropdown_kanban dropdown">
+                                        <a class="dropdown-toggle o-no-caret btn" role="button" data-toggle="dropdown" href="#" aria-label="Settings" title="Settings">
+                                            <span class="fa fa-ellipsis-v"/>
+                                        </a>
+                                        <div class="dropdown-menu" role="menu">
+                                            <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    Budget: <field name="budget"/>
+                                <div class="o_kanban_record_body mt-2">
+                                    <div class="text-muted">
+                                        <i class="fa fa-building-o mr-1"/> <field name="department_id"/>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <i class="fa fa-money mr-1"/> <field name="budget" widget="monetary"/>
+                                    </div>
+                                    <div class="mt-2">
+                                        <field name="progress" widget="progressbar"/>
+                                    </div>
                                 </div>
-                                <div class="oe_kanban_bottom_right">
-                                    <field name="status" widget="label_selection" options="{'classes': {'draft': 'default', 'in_progress': 'warning', 'completed': 'success', 'cancelled': 'danger'}}"/>
+                                <div class="o_kanban_record_bottom mt-3">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="activity_ids" widget="kanban_activity"/>
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="manager_id" widget="many2one_avatar_user"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -90,6 +116,8 @@
                     <field name="status" widget="statusbar" statusbar_visible="draft,in_progress,completed"/>
                 </header>
                 <sheet>
+                    <widget name="web_ribbon" title="Completed" bg_color="bg-success" attrs="{'invisible': [('status', '!=', 'completed')]}"/>
+                    <widget name="web_ribbon" title="Cancelled" bg_color="bg-danger" attrs="{'invisible': [('status', '!=', 'cancelled')]}"/>
                     <div class="oe_button_box" name="button_box">
                         <button name="%(action_beltech_project)d" type="action" class="oe_stat_button" icon="fa-tasks">
                             <field name="task_count" string="Tasks" widget="statinfo"/>

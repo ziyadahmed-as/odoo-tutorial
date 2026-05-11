@@ -7,6 +7,7 @@ class BeltechProject(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Project Name', required=True, tracking=True)
+    color = fields.Integer(string='Color Index')
     manager_id = fields.Many2one('res.users', string='Project Manager', required=True, tracking=True, default=lambda self: self.env.user)
     budget = fields.Float(string='Budget', required=True, tracking=True)
     deadline = fields.Date(string='Deadline', required=True, tracking=True)
