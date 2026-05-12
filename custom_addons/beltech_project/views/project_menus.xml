@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Top Menu -->
+        <menuitem id="menu_beltech_root" 
+                  name="BelTech Projects" 
+                  sequence="10"/>
+
+        <!-- Sub Menu -->
+        <menuitem id="menu_beltech_project" 
+                  name="Projects" 
+                  parent="menu_beltech_root" 
+                  action="action_beltech_project" 
+                  sequence="10"/>
+    </data>
+</odoo>

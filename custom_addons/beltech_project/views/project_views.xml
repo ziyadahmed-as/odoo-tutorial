@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="view_beltech_project_form" model="ir.ui.view">
+            <field name="name">beltech.project.form</field>
+            <field name="model">beltech.project</field>
+            <field name="arch" type="xml">
+                <form string="Project">
+                    <header>
+                        <field name="status" widget="statusbar" statusbar_visible="draft,in_progress,completed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Project Title..."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="manager_id"/>
+                                <field name="budget"/>
+                            </group>
+                            <group>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description" placeholder="Project Description..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- List View -->
+        <record id="view_beltech_project_list" model="ir.ui.view">
+            <field name="name">beltech.project.list</field>
+            <field name="model">beltech.project</field>
+            <field name="arch" type="xml">
+                <list string="Projects">
+                    <field name="name"/>
+                    <field name="manager_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="budget"/>
+                    <field name="status" widget="badge" 
+                           decoration-info="status == 'draft'" 
+                           decoration-warning="status == 'in_progress'" 
+                           decoration-success="status == 'completed'" 
+                           decoration-danger="status == 'cancelled'"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_beltech_project" model="ir.actions.act_window">
+            <field name="name">Projects</field>
+            <field name="res_model">beltech.project</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first BelTech Project!
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>
