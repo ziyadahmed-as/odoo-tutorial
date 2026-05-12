@@ -19,6 +19,11 @@
         'security/ir.model.access.csv',
         'views/project_views.xml',
         'views/project_menus.xml',
+        'views/views.xml',
+        'views/templates.xml',
+    ],
+    'demo': [
+        'demo/demo.xml',
     ],
     'installable': True,
     'application': True,
